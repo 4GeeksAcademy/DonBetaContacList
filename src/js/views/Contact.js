@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import ContactCard from "../components/ContactCard";
+import ContactCard from "../component/ContactCard";
 
 const Contact = () => {
     const { store } = useContext(Context);
