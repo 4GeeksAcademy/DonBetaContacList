@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
+
 const ContactCard = ({ contact }) => {
     const navigate = useNavigate();
 

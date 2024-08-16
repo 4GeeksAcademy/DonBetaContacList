@@ -7,17 +7,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: initialState,
 		action: {
 			// para crear un nuevo contacto
-			addContact: (contact) => {
-				const store = getStore();
-				const newContact = { ...contact, id: store.contacts.length + 1 };
-				setStore({ contacts: [ ...contact, newContact] });
-			},
+			addContact: (newContact) => {
+                const store = getStore();
+                newContact.id = store.contacts.length + 1;
+                setStore({ contacts: [...store.contacts, newContact] });
+            },
 
 			// para actualizar un contacto ya creado
 			updateContact: (id, updatedContact) => {
 				const store = getStore();
 				const updatedContacts = store.contacts.map( contact =>
-					contact.id === id ? { ...contact, ...updatedContact } : contact
+					contact.id === parseInt(id) ? { ...contact, ...updatedContact } : contact
 				);
 				setStore({ contacts: updatedContacts });
 			},

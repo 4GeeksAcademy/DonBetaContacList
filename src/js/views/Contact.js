@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import ContactCard from "../component/ContactCard";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
     const { store } = useContext(Context);
@@ -8,6 +9,7 @@ const Contact = () => {
     return (
         <div className="container">
             <h1 className="my-4">Contacts</h1>
+            <Link to="/add-contact" className="btn btn-success mb-4">Add New Contact</Link>
             <div className="row">
                 {store.contacts.length > 0 ?
                     (store.contacts.map(contact => (
