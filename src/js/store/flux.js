@@ -5,7 +5,7 @@ const initialState = {
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: initialState,
-		action: {
+		actions: {
 			// para crear un nuevo contacto
 			addContact: (newContact) => {
                 const store = getStore();

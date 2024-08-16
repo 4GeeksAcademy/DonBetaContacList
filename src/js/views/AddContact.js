@@ -32,6 +32,17 @@ const AddContact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!validateEmail(contact.email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (!validatePhone(contact.phone)) {
+            alert("Please enter a valid phone number.");
+            return;
+        }
+
         if (id) {
             actions.updateContact(id, contact);
         } else {
@@ -40,52 +51,62 @@ const AddContact = () => {
         navigate("/contacts");
     };
 
+    const validateEmail = (email) => {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    };
+
+    const validatePhone = (phone) => {
+        const re = /^[0-9\b]+$/;
+        return phone.length >= 9 && re.test(phone);
+    };
+
     return (
         <div className="container">
             <h1 className="my-4">{id ? "Edit Contact" : "Add New Contact"}</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label className="form-label">Full Name</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        name="full_name" 
-                        value={contact.full_name} 
-                        onChange={handleChange} 
-                        required 
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="full_name"
+                        value={contact.full_name}
+                        onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Email</label>
-                    <input 
-                        type="email" 
-                        className="form-control" 
-                        name="email" 
-                        value={contact.email} 
-                        onChange={handleChange} 
-                        required 
+                    <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        value={contact.email}
+                        onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Phone</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        name="phone" 
-                        value={contact.phone} 
-                        onChange={handleChange} 
-                        required 
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="phone"
+                        value={contact.phone}
+                        onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Address</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        name="address" 
-                        value={contact.address} 
-                        onChange={handleChange} 
-                        required 
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="address"
+                        value={contact.address}
+                        onChange={handleChange}
+                        required
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">
