@@ -9,11 +9,13 @@ import  Contact  from "./views/Contact";
 import AddContact from "./views/AddContact";
 import Register from "./views/Register";
 import Login from "./views/Login";
+import Logout from "./views/Logout";
 
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
 
 
 //create your first component
@@ -36,6 +38,7 @@ const Layout = () => {
 						<Route path="/edit-contact/:id" element={<AddContact />} />
 						<Route path="/register" element={<Register />} />
 						<Route path="/login" element={<Login />} />
+						<Route path="/logout" element={<Logout />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />
