@@ -1,2 +1,2 @@
-MONGO_URI=tu_uri_de_mongodb
-JWT_SECRET=tu_clave_secreta_para_jwt
+MONGO_URI=mongodb+srv;//Cb2728026:Cb2728026@contactlist.izhzq.mongodb.net/ContactList?retryWrites=true&w=majority&appName=ContactList
+JWT_SECRET=clave_donbeta
