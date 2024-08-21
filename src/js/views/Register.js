@@ -4,6 +4,8 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -28,12 +30,20 @@ const Register = () => {
             const data = await response.json();
 
             if (response.ok) {
+                // Almacenar el token en localStorage
+                localStorage.setItem('token', data.token);
                 console.log('Usuario registrado:', data);
+                setSuccess(true);
+                setError(null);
             } else {
                 console.error('Error en el registro:', data.message);
+                setError(data.message);
+                setSuccess(false);
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
+            setError('Ocurrió un error al registrar el usuario.');
+            setSuccess(false);
         }
     };
 
@@ -70,8 +80,11 @@ const Register = () => {
                 </div>
                 <button type="submit">Registrar</button>
             </form>
+            {success && <p>Registro exitoso. ¡Bienvenido!</p>}
+            {error && <p>Error: {error}</p>}
         </div>
     );
 };
 
 export default Register;
+
