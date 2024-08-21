@@ -5,6 +5,8 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -15,7 +17,7 @@ const Register = () => {
         };
 
         try {
-            const response = await fetch('https://fluffy-invention-4j75465x5gj7c7wxp-5000.app.github.dev/api/auth/register', {
+            const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,10 +28,8 @@ const Register = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Registro exitoso, manejar la respuesta
                 console.log('Usuario registrado:', data);
             } else {
-                // Error en el registro, manejar el error
                 console.error('Error en el registro:', data.message);
             }
         } catch (error) {
