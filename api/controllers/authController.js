@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/User');  // Importación correcta
 const jwt = require('jsonwebtoken');
 
 const generateToken = (id) => {
@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
                 token: generateToken(user._id)
             });
         } else {
-            res.status(401).json({ message: 'Email o contraseña Invalida' });
+            res.status(401).json({ message: 'Email o contraseña inválidos' });
         }
     } catch (error) {
         res.status(500).json({ message: 'Error del Servidor' });
