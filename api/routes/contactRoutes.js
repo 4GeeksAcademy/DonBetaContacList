@@ -1,3 +1,4 @@
+
 const express = require('express');
 const { getContacts, createContact, updateContact, deleteContact } = require('../controllers/contactController');
 const { protect } = require('../middleware/auth');
@@ -5,10 +6,10 @@ const router = express.Router();
 
 router.route('/')
     .get(protect, getContacts)
-    .post(createContact);
+    .post(protect, createContact);  
 
 router.route('/:id')
-    .put(updateContact)
-    .delete(deleteContact);
+    .put(protect, updateContact)  
+    .delete(protect, deleteContact);  
 
-module.exports = router;  
+module.exports = router;

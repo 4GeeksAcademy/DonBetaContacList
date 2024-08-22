@@ -1,12 +1,11 @@
-
-const Contact = require('../models/Contact'); // Asegúrate de que este es tu modelo de contacto
+const Contact = require('../models/Contact');
 
 // Obtener todos los contactos del usuario autenticado
 exports.getContacts = async (req, res) => {
     try {
-        // Suponiendo que tienes un usuario autenticado y `req.user.id` es el ID del usuario autenticado
-        const contacts = await Contact.find({ user: req.user.id });
+        console.log('Usuario autenticado ID:', req.user.id); // Depuración
 
+        const contacts = await Contact.find({ user: req.user.id });
         res.status(200).json({
             success: true,
             data: contacts
@@ -20,17 +19,61 @@ exports.getContacts = async (req, res) => {
     }
 };
 
-exports.createContact = (req, res) => {
-    // Lógica para crear un nuevo contacto
-    res.status(201).json({ success: true, data: "Contacto creado" });
+// Crear un nuevo contacto
+exports.createContact = async (req, res) => {
+    try {
+        const contact = await Contact.create({
+            user: req.user.id,
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone
+        });
+        res.status(201).json({
+            success: true,
+            data: contact
+        });
+    } catch (error) {
+        console.error('Error al crear el contacto:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al crear el contacto'
+        });
+    }
 };
 
-exports.updateContact = (req, res) => {
-    // Lógica para actualizar un contacto existente
-    res.status(200).json({ success: true, data: `Contacto ${req.params.id} actualizado` });
+// Actualizar un contacto existente
+exports.updateContact = async (req, res) => {
+    try {
+        const contact = await Contact.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+        if (!contact) {
+            return res.status(404).json({ success: false, message: 'Contacto no encontrado' });
+        }
+        res.status(200).json({ success: true, data: contact });
+    } catch (error) {
+        console.error('Error al actualizar el contacto:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al actualizar el contacto'
+        });
+    }
 };
 
-exports.deleteContact = (req, res) => {
-    // Lógica para eliminar un contacto existente
-    res.status(200).json({ success: true, data: `Contacto ${req.params.id} eliminado` });
+// Eliminar un contacto existente
+exports.deleteContact = async (req, res) => {
+    try {
+        const contact = await Contact.findByIdAndDelete(req.params.id);
+        if (!contact) {
+            return res.status(404).json({ success: false, message: 'Contacto no encontrado' });
+        }
+        res.status(200).json({ success: true, data: `Contacto con id ${req.params.id} eliminado` });
+    } catch (error) {
+        console.error('Error al eliminar el contacto:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al eliminar el contacto'
+        });
+    }
 };

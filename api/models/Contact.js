@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ContactSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',  // Referencia al modelo de usuario para asociar cada contacto con un usuario
+        ref: 'User', 
         required: true
     },
     name: {

@@ -1,6 +1,6 @@
 import React from "react";
 
-// agregado extra para la confirmacion de las acciones
+
 
 const Modal = ({ show, onClose, onConfirm, title, body }) => {
     if (!show) return null;

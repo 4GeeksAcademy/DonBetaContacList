@@ -93,8 +93,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
                     console.log('Datos recibidos de la API:', data);
 
-                    if (Array.isArray(data)) {
-                        setStore({ contacts: data });
+                    if (response.ok && Array.isArray(data.data)) {
+                        setStore({ contacts: data.data });
                     } else {
                         console.error('Error: La respuesta de la API no es un array', data);
                     }

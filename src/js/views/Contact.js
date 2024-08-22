@@ -10,21 +10,21 @@ const Contact = () => {
         actions.getContacts();
     }, []);
 
-
     return (
         <div className="container">
             <h1 className="my-4">Contacts</h1>
             <Link to="/add-contact" className="btn btn-success mb-4">Add New Contact</Link>
             <div className="row">
-                {store.contacts.length > 0 ?
-                    (store.contacts.map(contact => (
-                        <ContactCard key={contact.id} contact={contact} />
+                {store.contacts.length > 0 ? (
+                    store.contacts.map((contact, index) => (
+                        <ContactCard key={contact._id || contact.id || index} contact={contact} />
                     ))
-                    ) : (<p>Sin Contactos en tu lista, Puedes agregar contactos </p>
-
-                    )}
+                ) : (
+                    <p>No contacts available</p>
+                )}
             </div>
         </div>
     );
 };
+
 export default Contact;
