@@ -27,8 +27,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const updatedContacts = store.contacts.filter(contact => contact.id !== id);
 				setStore({ contacts: updatedContacts });
-			}
-		}
+			},
+			getContacts: async () => {
+                try {
+                    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/contacts`, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        }
+                    });
+                    const data = await response.json();
+                    setStore({ contacts: data });
+                } catch (error) {
+                    console.error('Error al obtener los contactos:', error);
+                }
+            },
+
+			
 	};
 };
 
