@@ -1,2 +1,31 @@
-MONGO_URI=mongodb+srv;//Cb2728026:Cb2728026@contactlist.izhzq.mongodb.net/ContactList?retryWrites=true&w=majority&appName=ContactList
-JWT_SECRET=clave_donbeta
+const mongoose = require('mongoose');
+
+// Definir el esquema de contacto
+const ContactSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',  // Referencia al modelo de usuario para asociar cada contacto con un usuario
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+// Crear el modelo de contacto usando el esquema
+const Contact = mongoose.model('Contact', ContactSchema);
+
+module.exports = Contact;
